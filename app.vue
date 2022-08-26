@@ -7,4 +7,7 @@ div
 * {
   margin: 0;
 }
+body {
+  -webkit-print-color-adjust: exact;
+}
 </style>
