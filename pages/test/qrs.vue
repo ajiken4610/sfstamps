@@ -37,7 +37,6 @@ const start = async () => {
         age: null,
         stamps: {},
         temp: null,
-        invitedFrom: null,
       });
       QRCode.toDataURL(
         "https://sfqrst.web.app/" + userDoc.id,
