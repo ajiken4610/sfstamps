@@ -58,8 +58,8 @@ const start = async () => {
   break-after: page;
 }
 .d-flex > * {
-  height: 33vh;
-  width: 50%;
+  height: calc(33vh - 1rem);
+  width: calc(50% - 1rem);
 }
 .d-flex > h1 {
   position: relative;
@@ -69,6 +69,9 @@ const start = async () => {
   top: 50%;
   text-align: center;
   transform: translateY(-50%);
+}
+.inner {
+  padding: 0.5rem;
 }
 img {
   image-rendering: pixelated;
