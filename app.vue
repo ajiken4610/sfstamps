@@ -8,6 +8,7 @@ div
   margin: 0;
 }
 body {
+  print-color-adjust: exact;
   -webkit-print-color-adjust: exact;
 }
 </style>
