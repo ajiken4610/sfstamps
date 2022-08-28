@@ -70,4 +70,7 @@ const start = async () => {
   text-align: center;
   transform: translateY(-50%);
 }
+img {
+  image-rendering: pixelated;
+}
 </style>
