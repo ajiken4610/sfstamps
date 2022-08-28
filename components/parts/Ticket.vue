@@ -5,16 +5,17 @@
       .card-content
         .float-end
           img(:src="qr")
-          .text-muted 来場当日に上のQRを
-            br
-            | 読み込んで情報を
-            br
-            | 登録してください
+          .text-muted
+            b 来場当日に上のQRを
+              br
+              | 読み込んで情報を
+              br
+              | 登録してください
         h2 2022年度
           br
           | サレジオ祭
-        .text-muted 一般入場チケット
-        .bottom.text-muted {{ owner || "7G名無し・名無しからの招待" }}
+        b.text-muted 一般入場チケット
+        b.bottom.text-muted {{ owner || "7G名無し・名無しからの招待" }}
 </template>
 
 <script setup lang="ts">
