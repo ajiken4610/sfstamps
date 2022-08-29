@@ -23,16 +23,24 @@ QRCode.toDataURL(
     sampleUrl.value = url;
   }
 );
+const rawData =
+  //
+  ``;
+const dataRows = rawData.split("\n");
+
 const qrs = reactive<string[][]>([]);
 const db = useDB();
 const start = async () => {
-  for (var i = 0; i < 1; i++) {
+  for (var i = 0; i < dataRows.length; i++) {
     qrs[i] = [];
-    for (var j = 0; j < 5; j++) {
+    const currentRow = dataRows[i].split(",");
+    const count = parseInt(currentRow[0]);
+    const name = currentRow[1];
+    for (var j = 0; j < count; j++) {
       const userDoc = doc(collection(db, "user"));
       await setDoc(userDoc, {
-        name: null,
-        owner: "",
+        name: name + "の招待",
+        owner: name,
         type: "fromStudent",
         age: null,
         stamps: {},
