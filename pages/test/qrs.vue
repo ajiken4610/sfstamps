@@ -1,10 +1,11 @@
 <template lang="pug">
 div(v-if="qrs.length")
   .d-flex(v-for="qr of qrs")
-    h1.inner
-      h1 {{ "7G名無し・名無し" }}
-    .inner(v-for="cqr of qr")
-      PartsTicket(:qr="cqr")
+    template(v-if="qr.length")
+      h1.inner
+        h1 {{ "7G名無し・名無し" }}
+      .inner(v-for="cqr of qr")
+        PartsTicket(:qr="cqr")
 div(v-else)
   button(@click="start") create
   .d-flex
@@ -23,38 +24,43 @@ QRCode.toDataURL(
     sampleUrl.value = url;
   }
 );
-const rawData =
-  //
-  ``;
+// const rawData =
+//   //
+// ``;
+const rawData = ",,網代健人,5\n".repeat(1);
 const dataRows = rawData.split("\n");
 
 const qrs = reactive<string[][]>([]);
 const db = useDB();
 const start = async () => {
   for (var i = 0; i < dataRows.length; i++) {
-    qrs[i] = [];
     const currentRow = dataRows[i].split(",");
-    const count = parseInt(currentRow[2]);
-    const name = currentRow[3];
-    for (var j = 0; j < count; j++) {
-      const userDoc = doc(collection(db, "user"));
-      await setDoc(userDoc, {
-        name: name + "の招待",
-        owner: name,
-        type: "fromStudent",
-        age: null,
-        stamps: {},
-        temp: null,
-        used: null,
-        reuseable: null,
-      });
-      QRCode.toDataURL(
-        "https://sfqrst.web.app/" + userDoc.id,
-        (err, url: string) => {
-          err && console.log(err);
-          qrs[i].push(url);
-        }
-      );
+    if (currentRow.length === 4) {
+      console.log(currentRow);
+      qrs[i] = [];
+      const count = parseInt(currentRow[3]);
+      const name = currentRow[2];
+      console.log(count, name);
+      for (var j = 0; j < count; j++) {
+        const userDoc = doc(collection(db, "user"));
+        await setDoc(userDoc, {
+          name: name + "の招待",
+          owner: name,
+          type: "fromStudent",
+          age: null,
+          stamps: {},
+          temp: null,
+          used: null,
+          reuseable: null,
+        });
+        QRCode.toDataURL(
+          "https://sfqrst.web.app/" + userDoc.id,
+          (err, url: string) => {
+            err && console.log(err);
+            qrs[i].push(url);
+          }
+        );
+      }
     }
   }
   console.log("generation successful");
