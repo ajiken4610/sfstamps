@@ -5,7 +5,7 @@ div(v-if="qrs.length")
       h1.inner
         h1 {{ names[index] }}
       .inner(v-for="cqr of qr")
-        PartsTicket(:qr="cqr")
+        PartsTicket(:qr="cqr", :owner="names[index]")
 div(v-else)
   button(@click="start") create
   .d-flex
@@ -27,7 +27,7 @@ QRCode.toDataURL(
 // const rawData =
 //   //
 // ``;
-const rawData = ",,網代健人,5\n".repeat(4);
+const rawData = ",,網代健人,5\n".repeat(1);
 const dataRows = rawData.split("\n");
 const names: string[] = reactive([]);
 
@@ -54,6 +54,8 @@ const start = async () => {
           temp: null,
           used: null,
           reuseable: null,
+          arriveSchedule: null,
+          isArriveScheduleConstraint: false,
         });
         QRCode.toDataURL(
           "https://sfqrst.web.app/" + userDoc.id,

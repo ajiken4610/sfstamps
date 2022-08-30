@@ -5,17 +5,20 @@
       .card-content
         .float-end
           img(:src="qr")
-          .text-muted
-            b 来場当日に上のQRを
-              br
-              | 読み込んで情報を
-              br
-              | 登録してください
+          .d-flex
+            .m-auto.text-muted.text-small
+              b QRより入力を
+                br
+                | お願いします
+                br
+                | ＞来場日
+                br
+                | ＞当日の体温
         h2 2022年度
           br
           | サレジオ祭
         b.text-muted 一般入場チケット
-        b.bottom.text-muted {{ owner || "7G名無し・名無しからの招待" }}
+        b.bottom.text-muted {{ (owner || "7G名無し・名無し") + "からの招待" }}
 </template>
 
 <script setup lang="ts">
@@ -23,6 +26,12 @@ defineProps<{ qr: string; owner?: string }>();
 </script>
 
 <style lang="scss">
+.d-flex {
+  display: flex;
+}
+.m-auto {
+  margin: auto;
+}
 h2 {
   color: white;
 }
@@ -56,5 +65,8 @@ h2 {
   background-size: cover;
   background-image: url("/0020-4k.png") !important;
   // background-image: url("/nasutanowa.png") !important;
+}
+.text-small {
+  font-size: 0.9rem;
 }
 </style>
