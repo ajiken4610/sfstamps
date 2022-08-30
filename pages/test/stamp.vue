@@ -4,6 +4,12 @@ div(v-if="!initialized")
   button(@click="init") init
 div(v-else)
   img.qr(:src="qr")
+  .d-1.text-center.mb スタンプラリー
+  h1.text-center チケット管理サイトの右上
+    UiIcon.d-2 qr_code
+    | より
+    br
+    | 読み込んでください。
 </template>
 <script setup lang="ts">
 import QRCode from "qrcode";
@@ -27,5 +33,17 @@ const init = () => {
   width: 100vw;
   height: 100vw;
   image-rendering: pixelated;
+}
+.d-1 {
+  font-size: 10vmin;
+}
+.d-2 {
+  font-size: 2rem;
+}
+.text-center {
+  text-align: center;
+}
+.mb {
+  margin-bottom: 1rem;
 }
 </style>
