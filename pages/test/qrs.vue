@@ -1,9 +1,9 @@
 <template lang="pug">
 div(v-if="qrs.length")
-  .d-flex(v-for="qr of qrs")
+  .d-flex(v-for="(qr,index) of qrs")
     template(v-if="qr.length")
       h1.inner
-        h1 {{ "7G名無し・名無し" }}
+        h1 {{ names[index] }}
       .inner(v-for="cqr of qr")
         PartsTicket(:qr="cqr")
 div(v-else)
@@ -27,8 +27,9 @@ QRCode.toDataURL(
 // const rawData =
 //   //
 // ``;
-const rawData = ",,網代健人,5\n".repeat(1);
+const rawData = ",,網代健人,5\n".repeat(4);
 const dataRows = rawData.split("\n");
+const names: string[] = reactive([]);
 
 const qrs = reactive<string[][]>([]);
 const db = useDB();
@@ -36,10 +37,11 @@ const start = async () => {
   for (var i = 0; i < dataRows.length; i++) {
     const currentRow = dataRows[i].split(",");
     if (currentRow.length === 4) {
-      console.log(currentRow);
+      // console.log(currentRow);
       qrs[i] = [];
       const count = parseInt(currentRow[3]);
       const name = currentRow[2];
+      names.push(name);
       console.log(count, name);
       for (var j = 0; j < count; j++) {
         const userDoc = doc(collection(db, "user"));
