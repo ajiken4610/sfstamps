@@ -18,6 +18,7 @@ const id = ref("");
 const qr = ref("");
 const init = () => {
   initialized.value = true;
+  console.log("'" + id.value + "'");
   QRCode.toDataURL(
     "https://sfqrst.web.app/stamp/" + id.value,
     (err, url: string) => {
