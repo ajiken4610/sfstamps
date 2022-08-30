@@ -20,7 +20,7 @@ const init = () => {
   initialized.value = true;
   console.log("'" + id.value + "'");
   QRCode.toDataURL(
-    "https://sfqrst.web.app/stamp/" + id.value,
+    "https://sfqrco.web.app/stamp/" + id.value,
     (err, url: string) => {
       err && console.log(err);
       qr.value = url;

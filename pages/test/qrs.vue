@@ -18,7 +18,7 @@ import { collection, doc, setDoc } from "@firebase/firestore";
 import QRCode from "qrcode";
 const sampleUrl = ref("");
 QRCode.toDataURL(
-  "https://sfqrst.web.app/xxxxxxxxxxxxxxxxxxxx",
+  "https://sfqrco.web.app/xxxxxxxxxxxxxxxxxxxx",
   (err, url: string) => {
     err && console.log(err);
     sampleUrl.value = url;
@@ -58,7 +58,7 @@ const start = async () => {
           isArriveScheduleConstraint: false,
         });
         QRCode.toDataURL(
-          "https://sfqrst.web.app/" + userDoc.id,
+          "https://sfqrco.web.app/" + userDoc.id,
           (err, url: string) => {
             err && console.log(err);
             qrs[i].push(url);
