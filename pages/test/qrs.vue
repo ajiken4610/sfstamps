@@ -34,8 +34,8 @@ const start = async () => {
   for (var i = 0; i < dataRows.length; i++) {
     qrs[i] = [];
     const currentRow = dataRows[i].split(",");
-    const count = parseInt(currentRow[0]);
-    const name = currentRow[1];
+    const count = parseInt(currentRow[2]);
+    const name = currentRow[3];
     for (var j = 0; j < count; j++) {
       const userDoc = doc(collection(db, "user"));
       await setDoc(userDoc, {
