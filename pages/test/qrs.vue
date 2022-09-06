@@ -24,10 +24,10 @@ QRCode.toDataURL(
     sampleUrl.value = url;
   }
 );
-// const rawData =
-//   //
-// ``;
-const rawData = ",,網代健人,5\n".repeat(1);
+const rawData =
+  //
+  ``;
+// const rawData = ",,網代健人,5\n".repeat(1);
 const dataRows = rawData.split("\n");
 const names: string[] = reactive([]);
 
@@ -56,6 +56,7 @@ const start = async () => {
           reuseable: null,
           arriveSchedule: null,
           isArriveScheduleConstraint: false,
+          giftReceived: false,
         });
         QRCode.toDataURL(
           "https://sfqrco.web.app/" + userDoc.id,

@@ -63,7 +63,7 @@ h2 {
 }
 .wrapper > * > * {
   background-size: cover;
-  background-image: url("/0020-4k.png") !important;
+  background-image: url("/0001.jpg") !important;
   // background-image: url("/nasutanowa.png") !important;
 }
 .text-small {
