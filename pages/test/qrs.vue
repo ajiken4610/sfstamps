@@ -36,7 +36,7 @@ const db = useDB();
 const start = async () => {
   for (var i = 0; i < dataRows.length; i++) {
     const currentRow = dataRows[i].split(",");
-    if (currentRow.length === 4) {
+    if (currentRow.length >= 4) {
       // console.log(currentRow);
       qrs[i] = [];
       const count = parseInt(currentRow[3]);
