@@ -18,7 +18,7 @@ import { collection, doc, setDoc } from "@firebase/firestore";
 import QRCode from "qrcode";
 const sampleUrl = ref("");
 QRCode.toDataURL(
-  "https://sfqrco.web.app/xxxxxxxxxxxxxxxxxxxx",
+  "https://sfqrco.web.app/00000000000000000000",
   (err, url: string) => {
     err && console.log(err);
     sampleUrl.value = url;
