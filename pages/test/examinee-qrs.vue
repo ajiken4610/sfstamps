@@ -73,7 +73,7 @@ const start = async () => {
 </script>
 
 <style scoped lang="scss">
-.d-flex {
+WW .d-flex {
   display: flex;
   flex-wrap: wrap;
   break-after: page;
