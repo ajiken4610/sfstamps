@@ -24,10 +24,10 @@ QRCode.toDataURL(
     sampleUrl.value = url;
   }
 );
-// const rawData =
-//   //
-//   ``;
-const rawData = ",,教職員,5\n".repeat(100);
+const rawData =
+  //
+  ``;
+// const rawData = ",,教職員,5\n".repeat(100);
 const dataRows = rawData.split("\n");
 const names: string[] = reactive([]);
 
@@ -40,7 +40,7 @@ const start = async () => {
       // console.log(currentRow);
       qrs[i] = [];
       const count = parseInt(currentRow[3]);
-      const name = currentRow[2] + i;
+      const name = currentRow[2];
       names.push(name);
       console.log(count, name);
       for (var j = 0; j < count; j++) {

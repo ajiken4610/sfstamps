@@ -24,40 +24,47 @@ QRCode.toDataURL(
     sampleUrl.value = url;
   }
 );
-// const rawData =
-//   //
-//   ``;
-const rawData = ",,教職員,5\n".repeat(100);
+const rawData =
+  //
+  ``;
+// const rawData = ",,教職員,5\n".repeat(100);
 const dataRows = rawData.split("\n");
 const names: string[] = reactive([]);
 
 const qrs = reactive<string[][]>([]);
 const db = useDB();
 const start = async () => {
+  const result = [];
   for (var i = 0; i < dataRows.length; i++) {
     const currentRow = dataRows[i].split(",");
     if (currentRow.length >= 4) {
       // console.log(currentRow);
       qrs[i] = [];
-      const count = parseInt(currentRow[3]);
-      const name = currentRow[2] + i;
-      names.push(name);
-      console.log(count, name);
-      for (var j = 0; j < count; j++) {
+      const email = currentRow[0];
+      const childCount = parseInt(currentRow[1]);
+      const parentCount = parseInt(currentRow[2]);
+      const name0 = currentRow[3];
+      const name1 = currentRow[4];
+      const name = name0 + name1;
+      names.push(name0 + name1);
+      const childTickets = [];
+      const parentTickets = [];
+      for (var j = 0; j < childCount; j++) {
         const userDoc = doc(collection(db, "user"));
         await setDoc(userDoc, {
-          name: name + "の招待",
-          owner: name,
-          type: "fromStudent",
+          name: name,
+          owner: "sf",
+          type: "examinee",
           age: null,
           stamps: {},
           temp: null,
           used: null,
           reuseable: null,
-          arriveSchedule: null,
-          isArriveScheduleConstraint: false,
+          arriveSchedule: "pm18",
+          isArriveScheduleConstraint: true,
           giftReceived: false,
         });
+        childTickets.push(userDoc.id);
         QRCode.toDataURL(
           "https://sfqrco.web.app/" + userDoc.id,
           (err, url: string) => {
@@ -66,14 +73,49 @@ const start = async () => {
           }
         );
       }
+      for (var j = 0; j < parentCount; j++) {
+        const userDoc = doc(collection(db, "user"));
+        await setDoc(userDoc, {
+          name: name + "の保護者様",
+          owner: "sf",
+          type: "examinee",
+          age: null,
+          stamps: {},
+          temp: null,
+          used: null,
+          reuseable: null,
+          arriveSchedule: "pm18",
+          isArriveScheduleConstraint: true,
+          giftReceived: false,
+        });
+        parentTickets.push(userDoc.id);
+        QRCode.toDataURL(
+          "https://sfqrco.web.app/" + userDoc.id,
+          (err, url: string) => {
+            err && console.log(err);
+            qrs[i].push(url);
+          }
+        );
+      }
+      console.log(childTickets.join("-") + "_" + parentTickets.join("-"));
+      result.push(
+        [
+          email,
+          name0,
+          name1,
+          name,
+          childTickets.join("-") + "_" + parentTickets.join("-"),
+        ].join(",")
+      );
     }
   }
+  console.log(result.join("\n"));
   console.log("generation successful");
 };
 </script>
 
 <style scoped lang="scss">
-WW .d-flex {
+.d-flex {
   display: flex;
   flex-wrap: wrap;
   break-after: page;
